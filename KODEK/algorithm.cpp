@@ -24,9 +24,12 @@
 //The code is not that efficient, and has a bias for backup, not restore speed.
 //=============================================================================
 
+#include "stdafx.h"
+
 //PRBS
 
 /* (a^b)%m */
+
 static int powmod(int a, int b, int m) {
 	int x = 1, y = a;
 	while (b > 0) {
@@ -67,7 +70,7 @@ static int inverse(int a, int m) {
 //sequence travel functions
 
 //the SEED contains the compressed information statistic
-static int seed = 7;
+int seed = 7;
 
 //these four are the sequencing control numbers, constants (sort of)
 static int b[] = { 411, 713 };
@@ -212,7 +215,7 @@ static void compressOne() {
 
 //blat - do an int!
 
-static void compress(int x) {
+void compress(int x) {
 	buffer = x;
 	cnt = 32;
 	while (cnt > 0) {
@@ -220,7 +223,7 @@ static void compress(int x) {
 	}
 }
 
-static int decompress() {
+int decompress() {
 	cnt = 32;
 	while (cnt > 0) {
 		decompressOne();

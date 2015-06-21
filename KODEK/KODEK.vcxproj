@@ -158,6 +158,7 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="algorithm.cpp" />
     <ClCompile Include="DlgProxy.cpp" />
     <ClCompile Include="KODEK.cpp" />
     <ClCompile Include="KODEKDlg.cpp" />
