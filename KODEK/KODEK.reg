@@ -1,0 +1,17 @@
+REGEDIT
+; This .REG file may be used by your SETUP program.
+;   If a SETUP program is not available, the entries below will be
+;   registered in your InitInstance automatically with a call to
+;   CWinApp::RegisterShellFileTypes and COleObjectFactory::UpdateRegistryAll.
+
+
+HKEY_CLASSES_ROOT\KODEK.Application = KODEK Application
+
+
+HKEY_CLASSES_ROOT\KODEK.Application\CLSID = {590EAB33-FC7A-42E4-B010-45975C44C06F}
+
+HKEY_CLASSES_ROOT\CLSID\{590EAB33-FC7A-42E4-B010-45975C44C06F} = KODEK Application
+HKEY_CLASSES_ROOT\CLSID\{590EAB33-FC7A-42E4-B010-45975C44C06F}\ProgId = KODEK.Application
+
+
+HKEY_CLASSES_ROOT\CLSID\{590EAB33-FC7A-42E4-B010-45975C44C06F}\LocalServer32 = KODEK.EXE

@@ -1,0 +1,29 @@
+// KODEK.idl : type library source for KODEK.exe
+
+// This file will be processed by the MIDL compiler to produce the
+// type library (KODEK.tlb).
+
+[ uuid(454E0117-1BB9-4022-A89D-59D12FF665E4), version(1.0) ]
+library KODEK
+{
+	importlib("stdole32.tlb");
+	importlib("stdole2.tlb");
+
+	//  Primary dispatch interface for CKODEKDoc
+	
+	[ uuid(6B64E0EC-AB4F-4805-819B-8B8AF3FC3786) ]
+	dispinterface IKODEK
+	{
+		properties:
+			
+		methods:
+	};
+
+	//  Class information for CKODEKDoc
+	
+	[ uuid(590EAB33-FC7A-42E4-B010-45975C44C06F) ]
+	coclass KODEK
+	{
+		[default] dispinterface IKODEK;
+	};
+};
