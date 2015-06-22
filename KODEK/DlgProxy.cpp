@@ -84,3 +84,23 @@ IMPLEMENT_OLECREATE2(CKODEKDlgAutoProxy, "KODEK.Application", 0x590eab33, 0xfc7a
 
 
 // CKODEKDlgAutoProxy message handlers
+
+
+STDMETHODIMP CKODEKDlgAutoProxy::code(CHAR* file, LONG* val)
+{
+	AFX_MANAGE_STATE(AfxGetAppModuleState());
+
+	// TODO: Add your implementation code here
+
+	return S_OK;
+}
+
+
+STDMETHODIMP CKODEKDlgAutoProxy::decode(CHAR* file, LONG* val)
+{
+	AFX_MANAGE_STATE(AfxGetAppModuleState());
+
+	// TODO: Add your implementation code here
+
+	return S_OK;
+}

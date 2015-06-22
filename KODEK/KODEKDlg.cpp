@@ -133,11 +133,11 @@ void CKODEKDlg::OnClose()
 		CDialogEx::OnClose();
 }
 
-void CKODEKDlg::OnOK()
-{
-	if (CanExit())
-		CDialogEx::OnOK();
-}
+//void CKODEKDlg::OnOK()
+//{
+//	if (CanExit())
+//		CDialogEx::OnOK();
+//}
 
 void CKODEKDlg::OnCancel()
 {

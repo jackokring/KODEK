@@ -36,6 +36,9 @@
     <ClInclude Include="Resource.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="KODEK_h.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="KODEK.cpp">
@@ -65,6 +68,15 @@
   <ItemGroup>
     <None Include="KODEK.reg" />
     <None Include="res\KODEK.rc2">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="KODEK.rgs">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\kodek1.bin">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\kodek2.bin">
       <Filter>Resource Files</Filter>
     </None>
   </ItemGroup>

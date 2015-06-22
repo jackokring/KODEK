@@ -39,5 +39,8 @@ protected:
 
 	DECLARE_DISPATCH_MAP()
 	DECLARE_INTERFACE_MAP()
+public:
+	STDMETHOD(code)(CHAR* file, LONG* val);
+	STDMETHOD(decode)(CHAR* file, LONG* val);
 };
 
