@@ -18,6 +18,8 @@ library KODEK
 			
 		methods:
 			
+			[id(1), helpstring("Compress File")] HRESULT code(CHAR* file, LONG* val);
+			[id(2), helpstring("Decompress File")] HRESULT decode(CHAR* file, LONG* val);
 	};
 
 	//  Class information for CKODEKDoc

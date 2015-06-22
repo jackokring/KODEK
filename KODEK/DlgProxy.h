@@ -42,5 +42,14 @@ protected:
 public:
 	STDMETHOD(code)(CHAR* file, LONG* val);
 	STDMETHOD(decode)(CHAR* file, LONG* val);
+protected:
+	HRESULT code(CHAR* file, LONG* val);
+
+	enum
+	{
+		dispiddecode = 2L,
+		dispidcode = 1L
+	};
+	HRESULT decode(CHAR* file, LONG* val);
 };
 
