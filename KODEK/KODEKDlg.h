@@ -40,4 +40,8 @@ protected:
 	virtual void OnOK();
 	virtual void OnCancel();
 	DECLARE_MESSAGE_MAP()
+public:
+	afx_msg void OnBnClickedDecompress();
+	afx_msg void OnBnClickedCompress();
+	afx_msg void OnEnChangeSeed();
 };

@@ -43,6 +43,8 @@ BEGIN_MESSAGE_MAP(CKODEKDlg, CDialogEx)
 	ON_WM_CLOSE()
 	ON_WM_PAINT()
 	ON_WM_QUERYDRAGICON()
+	ON_BN_CLICKED(IDDECOMPRESS, &CKODEKDlg::OnBnClickedDecompress)
+	ON_BN_CLICKED(IDCOMPRESS, &CKODEKDlg::OnBnClickedCompress)
 END_MESSAGE_MAP()
 
 
@@ -136,3 +138,18 @@ BOOL CKODEKDlg::CanExit()
 	return TRUE;
 }
 
+extern CString FileOpen(bool load);
+extern wchar_t * fileDefault;
+
+void CKODEKDlg::OnBnClickedDecompress()
+{
+	fileDefault = _T("test");
+	FileOpen(FALSE);
+}
+
+
+void CKODEKDlg::OnBnClickedCompress()
+{
+	fileDefault = NULL;
+	FileOpen(TRUE);
+}
