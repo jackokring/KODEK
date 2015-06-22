@@ -3,6 +3,8 @@
 //
 
 #pragma once
+#include "afxwin.h"
+#include "afxcmn.h"
 
 class CKODEKDlgAutoProxy;
 
@@ -44,4 +46,8 @@ public:
 	afx_msg void OnBnClickedDecompress();
 	afx_msg void OnBnClickedCompress();
 	afx_msg void OnEnChangeSeed();
+	CButton compressButton;
+	CButton decompressButton;
+	CEdit seedEntry;
+	CProgressCtrl progressBar;
 };

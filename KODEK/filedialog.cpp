@@ -32,5 +32,5 @@ CString FileOpen(bool load)
 
 		fileDlg.GetSafeOwner()->SetWindowText(fileName);
 		return pathName;
-	} else return NULL;
+	} else return CString("");
 }

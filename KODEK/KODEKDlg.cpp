@@ -34,9 +34,29 @@ CKODEKDlg::~CKODEKDlg()
 		m_pAutoProxy->m_pDialog = NULL;
 }
 
+static bool running = false;//process active?
+
+static void progress(CProgressCtrl *myCtrl, int pos) {//MUST pass controls by reference
+	int nLower, nUpper;
+	myCtrl->GetRange(nLower, nUpper);
+	myCtrl->SetPos((nUpper - nLower) * pos / 100);
+}
+
+static void run(CKODEKDlg *that, bool active) {
+	running = !active;//opposite of control active
+	that->seedEntry.EnableWindow(active);
+	that->compressButton.EnableWindow(active);
+	that->decompressButton.EnableWindow(active);
+	if (active) progress(&that->progressBar, 0);
+}
+
 void CKODEKDlg::DoDataExchange(CDataExchange* pDX)
 {
 	CDialogEx::DoDataExchange(pDX);
+	DDX_Control(pDX, IDCOMPRESS, compressButton);
+	DDX_Control(pDX, IDDECOMPRESS, decompressButton);
+	DDX_Control(pDX, IDSEED, seedEntry);
+	DDX_Control(pDX, IDPERCENT, progressBar);
 }
 
 BEGIN_MESSAGE_MAP(CKODEKDlg, CDialogEx)
@@ -108,6 +128,7 @@ HCURSOR CKODEKDlg::OnQueryDragIcon()
 
 void CKODEKDlg::OnClose()
 {
+	run(this, true);
 	if (CanExit())
 		CDialogEx::OnClose();
 }
@@ -141,15 +162,30 @@ BOOL CKODEKDlg::CanExit()
 extern CString FileOpen(bool load);
 extern wchar_t * fileDefault;
 
+static CString named;
+
+//The functions below should thread the while loop
 void CKODEKDlg::OnBnClickedDecompress()
 {
+	run(this, false);
 	fileDefault = _T("test");
-	FileOpen(FALSE);
+	if ((named = FileOpen(false)) == "") {
+		run(this, true);
+		return;
+	}
+	while (running);
+	run(this, true);
 }
 
 
 void CKODEKDlg::OnBnClickedCompress()
 {
+	run(this, false);
 	fileDefault = NULL;
-	FileOpen(TRUE);
+	if ((named = FileOpen(true)) == "") {
+		run(this, true);
+		return;
+	}
+	while (running);
+	run(this, true);
 }
