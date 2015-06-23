@@ -206,6 +206,8 @@
     <ResourceCompile Include="KODEK.rc" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="..\..\..\..\Icon Resources\Icon_54.ico" />
+    <Image Include="..\..\..\..\Icon_54.ico" />
     <Image Include="res\KODEK.ico" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
