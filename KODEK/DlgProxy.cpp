@@ -66,6 +66,7 @@ END_MESSAGE_MAP()
 BEGIN_DISPATCH_MAP(CKODEKDlgAutoProxy, CCmdTarget)
 	DISP_FUNCTION_ID(CKODEKDlgAutoProxy, "code", dispidcode, code, VT_HRESULT, VTS_PI1 VTS_PI4)
 	DISP_FUNCTION_ID(CKODEKDlgAutoProxy, "decode", dispiddecode, decode, VT_HRESULT, VTS_PI1 VTS_PI4)
+	DISP_FUNCTION_ID(CKODEKDlgAutoProxy, "close", dispidclose, close, VT_HRESULT, VTS_NONE)
 END_DISPATCH_MAP()
 
 // Note: we add support for IID_IKODEK to support typesafe binding
@@ -99,6 +100,16 @@ HRESULT CKODEKDlgAutoProxy::code(CHAR* file, LONG* val)
 
 
 HRESULT CKODEKDlgAutoProxy::decode(CHAR* file, LONG* val)
+{
+	AFX_MANAGE_STATE(AfxGetAppModuleState());
+
+	// TODO: Add your dispatch handler code here
+
+	return S_OK;
+}
+
+
+HRESULT CKODEKDlgAutoProxy::close()
 {
 	AFX_MANAGE_STATE(AfxGetAppModuleState());
 

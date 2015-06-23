@@ -46,9 +46,11 @@ protected:
 
 	enum
 	{
+		dispidclose = 3L,
 		dispiddecode = 2L,
 		dispidcode = 1L
 	};
 	HRESULT decode(CHAR* file, LONG* val);
+	HRESULT close();
 };
 

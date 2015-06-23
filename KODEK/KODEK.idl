@@ -20,6 +20,7 @@ library KODEK
 			
 			[id(1), helpstring("Compress File")] HRESULT code(CHAR* file, LONG* val);
 			[id(2), helpstring("Decompress File")] HRESULT decode(CHAR* file, LONG* val);
+			[id(3), helpstring("Close After Registration")] HRESULT close();
 	};
 
 	//  Class information for CKODEKDoc
