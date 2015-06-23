@@ -7,6 +7,7 @@
 #include "KODEKDlg.h"
 #include "DlgProxy.h"
 #include "afxdialogex.h"
+#include "About.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -196,5 +197,6 @@ void CKODEKDlg::OnBnClickedCompress()
 
 void CKODEKDlg::OnBnClickedAbout()
 {
-	// TODO: Add your control notification handler code here
+	About dlg;
+	dlg.DoModal();
 }
