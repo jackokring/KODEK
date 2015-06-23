@@ -57,6 +57,7 @@ void CKODEKDlg::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDDECOMPRESS, decompressButton);
 	DDX_Control(pDX, IDSEED, seedEntry);
 	DDX_Control(pDX, IDPERCENT, progressBar);
+	DDX_Control(pDX, IDABOUT, aboutButton);
 }
 
 BEGIN_MESSAGE_MAP(CKODEKDlg, CDialogEx)
@@ -65,6 +66,7 @@ BEGIN_MESSAGE_MAP(CKODEKDlg, CDialogEx)
 	ON_WM_QUERYDRAGICON()
 	ON_BN_CLICKED(IDDECOMPRESS, &CKODEKDlg::OnBnClickedDecompress)
 	ON_BN_CLICKED(IDCOMPRESS, &CKODEKDlg::OnBnClickedCompress)
+	ON_BN_CLICKED(IDABOUT, &CKODEKDlg::OnBnClickedAbout)
 END_MESSAGE_MAP()
 
 
@@ -80,6 +82,7 @@ BOOL CKODEKDlg::OnInitDialog()
 	SetIcon(m_hIcon, FALSE);		// Set small icon
 
 	// TODO: Add extra initialization here
+	SendDlgItemMessage(IDABOUT, BM_SETIMAGE, (WPARAM)IMAGE_ICON, (LPARAM)m_hIcon);
 
 	return TRUE;  // return TRUE  unless you set the focus to a control
 }
@@ -188,4 +191,10 @@ void CKODEKDlg::OnBnClickedCompress()
 	}
 	while (running);
 	run(this, true);
+}
+
+
+void CKODEKDlg::OnBnClickedAbout()
+{
+	// TODO: Add your control notification handler code here
 }

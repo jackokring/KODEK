@@ -4,7 +4,7 @@
 
 
  /* File created by MIDL compiler version 8.00.0603 */
-/* at Mon Jun 22 18:47:33 2015
+/* at Tue Jun 23 09:32:33 2015
  */
 /* Compiler settings for KODEK.idl:
     Oicf, W1, Zp8, env=Win32 (32b run), target_arch=X86 8.00.0603 
@@ -152,9 +152,7 @@ EXTERN_C const IID DIID_IKODEK;
     interface IKODEK
     {
         CONST_VTBL struct IKODEKVtbl *lpVtbl;
-		[, helpstring("Compress File"), local] HRESULT code([in] CHAR* file, [out] LONG* val);
-		[, helpstring("Decompress File"), local] HRESULT decode([in] CHAR* file, [in] LONG* val);
-	};
+    };
 
     
 

@@ -50,4 +50,6 @@ public:
 	CButton decompressButton;
 	CEdit seedEntry;
 	CProgressCtrl progressBar;
+	CButton aboutButton;
+	afx_msg void OnBnClickedAbout();
 };
