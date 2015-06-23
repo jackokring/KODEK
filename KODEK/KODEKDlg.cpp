@@ -237,11 +237,9 @@ bool CKODEKDlg::streamCode(CHAR* file, LONG* val)
 }
 
 
-HRESULT CKODEKDlgAutoProxy::stream(CHAR* buffer, LONG* len, LONG* val)
+bool CKODEKDlg::stream(CHAR* buffer, LONG* len, LONG* val)
 {
-	AFX_MANAGE_STATE(AfxGetAppModuleState());
-
 	// TODO: Add your dispatch handler code here
 
-	return S_OK;
+	return true;
 }
