@@ -172,7 +172,7 @@ static CString named;
 void CKODEKDlg::OnBnClickedDecompress()
 {
 	run(this, false);
-	fileDefault = _T("test");
+	fileDefault = _T("test.cpp");
 	if ((named = FileOpen(false)) == "") {
 		run(this, true);
 		return;

@@ -28,7 +28,7 @@ CString FileOpen(bool load)
 		// Implement opening and reading file in here. 
 
 		//Change the window's title to the opened file's title.
-		CString fileName = fileDlg.GetFileTitle();
+		CString fileName = fileDlg.GetFileTitle() + "." + fileDlg.GetFileExt();
 
 		fileDlg.GetSafeOwner()->SetWindowText(fileName);
 		return pathName;
