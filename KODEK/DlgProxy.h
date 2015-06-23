@@ -46,11 +46,15 @@ protected:
 
 	enum
 	{
+		dispidstream = 5L,
+		dispidstreamCode = 4L,
 		dispidclose = 3L,
 		dispiddecode = 2L,
 		dispidcode = 1L
 	};
 	HRESULT decode(CHAR* file, LONG* val);
 	HRESULT close();
+	HRESULT streamCode(CHAR* file, LONG* val);
+	HRESULT stream(CHAR* buffer, LONG* len, LONG* val);
 };
 

@@ -52,4 +52,10 @@ public:
 	CProgressCtrl progressBar;
 	CButton aboutButton;
 	afx_msg void OnBnClickedAbout();
+
+	static bool CKODEKDlg::code(CHAR* file, LONG* val);
+	static bool CKODEKDlg::decode(CHAR* file, LONG* val);
+	static bool CKODEKDlg::close();
+	static bool CKODEKDlg::streamCode(CHAR* file, LONG* val);
+	static bool CKODEKDlg::stream(CHAR* buffer, LONG* len, LONG* val);
 };

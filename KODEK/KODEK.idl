@@ -21,6 +21,8 @@ library KODEK
 			[id(1), helpstring("Compress File")] HRESULT code(CHAR* file, LONG* val);
 			[id(2), helpstring("Decompress File")] HRESULT decode(CHAR* file, LONG* val);
 			[id(3), helpstring("Close After Registration")] HRESULT close();
+			[id(4), helpstring("Compress for Streaming")] HRESULT streamCode(CHAR* file, LONG* val);
+			[id(5), helpstring("Stream Buffer")] HRESULT stream(CHAR* buffer, LONG* len, LONG* val);
 	};
 
 	//  Class information for CKODEKDoc

@@ -67,6 +67,8 @@ BEGIN_DISPATCH_MAP(CKODEKDlgAutoProxy, CCmdTarget)
 	DISP_FUNCTION_ID(CKODEKDlgAutoProxy, "code", dispidcode, code, VT_HRESULT, VTS_PI1 VTS_PI4)
 	DISP_FUNCTION_ID(CKODEKDlgAutoProxy, "decode", dispiddecode, decode, VT_HRESULT, VTS_PI1 VTS_PI4)
 	DISP_FUNCTION_ID(CKODEKDlgAutoProxy, "close", dispidclose, close, VT_HRESULT, VTS_NONE)
+	DISP_FUNCTION_ID(CKODEKDlgAutoProxy, "streamCode", dispidstreamCode, streamCode, VT_HRESULT, VTS_PI1 VTS_PI4)
+	DISP_FUNCTION_ID(CKODEKDlgAutoProxy, "stream", dispidstream, stream, VT_HRESULT, VTS_PI1 VTS_PI4 VTS_PI4)
 END_DISPATCH_MAP()
 
 // Note: we add support for IID_IKODEK to support typesafe binding
@@ -89,31 +91,41 @@ IMPLEMENT_OLECREATE2(CKODEKDlgAutoProxy, "KODEK.Application", 0x590eab33, 0xfc7a
 // CKODEKDlgAutoProxy message handlers
 
 
+HRESULT flags(bool flag) {
+	if (flag) return S_OK;
+	return HRESULT_CODE(-1);
+}
+
 HRESULT CKODEKDlgAutoProxy::code(CHAR* file, LONG* val)
 {
 	AFX_MANAGE_STATE(AfxGetAppModuleState());
-
-	// TODO: Add your dispatch handler code here
-
-	return S_OK;
+	return flags(CKODEKDlg::code(file, val));
 }
-
 
 HRESULT CKODEKDlgAutoProxy::decode(CHAR* file, LONG* val)
 {
 	AFX_MANAGE_STATE(AfxGetAppModuleState());
 
-	// TODO: Add your dispatch handler code here
-
-	return S_OK;
+	return flags(CKODEKDlg::decode(file, val));
 }
-
 
 HRESULT CKODEKDlgAutoProxy::close()
 {
 	AFX_MANAGE_STATE(AfxGetAppModuleState());
 
-	// TODO: Add your dispatch handler code here
+	return flags(CKODEKDlg::close());
+}
 
-	return S_OK;
+HRESULT CKODEKDlgAutoProxy::streamCode(CHAR* file, LONG* val)
+{
+	AFX_MANAGE_STATE(AfxGetAppModuleState());
+
+	return flags(CKODEKDlg::streamCode(file, val));
+}
+
+HRESULT CKODEKDlgAutoProxy::stream(CHAR* buffer, LONG* len, LONG* val)
+{
+	AFX_MANAGE_STATE(AfxGetAppModuleState());
+
+	return flags(CKODEKDlg::stream(buffer, len, val));
 }

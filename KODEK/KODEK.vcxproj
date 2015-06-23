@@ -152,6 +152,7 @@
   <ItemGroup>
     <ClInclude Include="About.h" />
     <ClInclude Include="DlgProxy.h" />
+    <ClInclude Include="Error.h" />
     <ClInclude Include="KODEK.h" />
     <ClInclude Include="KODEKDlg.h" />
     <ClInclude Include="Resource.h" />
@@ -162,6 +163,7 @@
     <ClCompile Include="About.cpp" />
     <ClCompile Include="algorithm.cpp" />
     <ClCompile Include="DlgProxy.cpp" />
+    <ClCompile Include="Error.cpp" />
     <ClCompile Include="filedialog.cpp" />
     <ClCompile Include="KODEK.cpp" />
     <ClCompile Include="KODEKDlg.cpp" />

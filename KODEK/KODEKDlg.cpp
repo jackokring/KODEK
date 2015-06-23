@@ -8,6 +8,7 @@
 #include "DlgProxy.h"
 #include "afxdialogex.h"
 #include "About.h"
+#include "Error.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -33,6 +34,11 @@ CKODEKDlg::~CKODEKDlg()
 	//  the dialog has been deleted.
 	if (m_pAutoProxy != NULL)
 		m_pAutoProxy->m_pDialog = NULL;
+}
+
+static void error() {
+	Error dlg;
+	dlg.DoModal();
 }
 
 static bool running = false;//process active?
@@ -194,9 +200,48 @@ void CKODEKDlg::OnBnClickedCompress()
 	run(this, true);
 }
 
-
 void CKODEKDlg::OnBnClickedAbout()
 {
 	About dlg;
 	dlg.DoModal();
+}
+
+bool CKODEKDlg::code(CHAR* file, LONG* val)
+{
+	// TODO: Add your dispatch handler code here
+
+	return true;
+}
+
+bool CKODEKDlg::decode(CHAR* file, LONG* val)
+{
+	// TODO: Add your dispatch handler code here
+
+	return true;
+}
+
+
+bool CKODEKDlg::close()
+{
+	// TODO: Add your dispatch handler code here
+
+	return true;
+}
+
+
+bool CKODEKDlg::streamCode(CHAR* file, LONG* val)
+{
+	// TODO: Add your dispatch handler code here
+
+	return true;
+}
+
+
+HRESULT CKODEKDlgAutoProxy::stream(CHAR* buffer, LONG* len, LONG* val)
+{
+	AFX_MANAGE_STATE(AfxGetAppModuleState());
+
+	// TODO: Add your dispatch handler code here
+
+	return S_OK;
 }
