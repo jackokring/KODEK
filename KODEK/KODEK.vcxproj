@@ -196,6 +196,9 @@
     </Midl>
   </ItemGroup>
   <ItemGroup>
+    <None Include="HTML.htm">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
     <None Include="KODEK.reg" />
     <None Include="KODEK.rgs" />
     <None Include="res\KODEK.rc2" />
@@ -208,6 +211,8 @@
   <ItemGroup>
     <Image Include="..\..\..\..\Icon Resources\Icon_54.ico" />
     <Image Include="..\..\..\..\Icon_54.ico" />
+    <Image Include="res\foobar.ico" />
+    <Image Include="res\icon1.ico" />
     <Image Include="res\KODEK.ico" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

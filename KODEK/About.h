@@ -20,4 +20,5 @@ protected:
 	DECLARE_MESSAGE_MAP()
 public:
 	afx_msg void OnClickedOK();
+	afx_msg void OnBnClickedWww();
 };

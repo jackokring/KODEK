@@ -29,6 +29,7 @@ void About::DoDataExchange(CDataExchange* pDX)
 
 BEGIN_MESSAGE_MAP(About, CDialogEx)
 	ON_BN_CLICKED(IDOK_ABOUT, &About::OnClickedOK)
+	ON_BN_CLICKED(IDC_WWW, &About::OnBnClickedWww)
 END_MESSAGE_MAP()
 
 
@@ -38,4 +39,10 @@ END_MESSAGE_MAP()
 void About::OnClickedOK()
 {
 	CDialogEx::OnOK();
+}
+
+
+void About::OnBnClickedWww()
+{
+	ShellExecute(NULL, _T("open"), _T("http://www.kring.co.uk"), NULL, NULL, SW_SHOWNORMAL);
 }
