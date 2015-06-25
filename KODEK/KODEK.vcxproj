@@ -204,6 +204,7 @@
     <None Include="res\KODEK.rc2" />
     <None Include="res\kodek1.bin" />
     <None Include="res\kodek2.bin" />
+    <None Include="Test EXE\KODEK.exe" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="KODEK.rc" />
