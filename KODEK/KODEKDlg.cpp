@@ -36,12 +36,19 @@ CKODEKDlg::~CKODEKDlg()
 		m_pAutoProxy->m_pDialog = NULL;
 }
 
-static void error() {
-	Error dlg;
-	dlg.DoModal();
-}
+static enum state { START, ACTION_COMPRESS, ACTION_DECOMPRESS, ACTION_COMPRESS_STREAM, ACTION_STREAM, END, TERM, ERRORBOX };
+static enum state here = END;
 
-static bool running = false;//process active?
+extern void bgTask(CKODEKDlg *that);//can call error function
+
+static bool run(CKODEKDlg *that, enum state newHere);//forward
+
+static UINT BackThread(LPVOID pParam) {
+	CKODEKDlg * gui = (CKODEKDlg *)pParam;
+	bgTask(gui);
+	run(gui, END);//the thread has completed
+	return 0;
+}
 
 static void progress(CProgressCtrl *myCtrl, int pos) {//MUST pass controls by reference
 	int nLower, nUpper;
@@ -49,12 +56,34 @@ static void progress(CProgressCtrl *myCtrl, int pos) {//MUST pass controls by re
 	myCtrl->SetPos((nUpper - nLower) * pos / 100);
 }
 
-static void run(CKODEKDlg *that, bool active) {
-	running = !active;//opposite of control active
-	that->seedEntry.EnableWindow(active);
-	that->compressButton.EnableWindow(active);
-	that->decompressButton.EnableWindow(active);
-	if (active) progress(&that->progressBar, 0);
+void error(CKODEKDlg *that) {
+	run(that, ERRORBOX);
+}
+
+static bool run(CKODEKDlg *that, enum state newHere) {
+	if (newHere == ERRORBOX) {
+		newHere = END;
+		Error dlg;
+		dlg.DoModal();
+	}
+	if (here != END && newHere == START) {
+		return true;//not allowed!!
+	}
+	if(here != TERM) here = newHere;
+	if (that != NULL) {
+		if (here == END) {
+			progress(&that->progressBar, 0);
+			that->GetSafeOwner()->SetWindowText(_T("KODEK"));
+		}
+		that->seedEntry.EnableWindow(here == END);
+		that->compressButton.EnableWindow(here == END);
+		that->decompressButton.EnableWindow(here == END);
+	}
+	if (here == TERM) return true;//exit don't do anything
+	if (here != END && here != START) {
+		AfxBeginThread(BackThread, that);
+	}
+	return false;//OK
 }
 
 void CKODEKDlg::DoDataExchange(CDataExchange* pDX)
@@ -138,7 +167,7 @@ HCURSOR CKODEKDlg::OnQueryDragIcon()
 
 void CKODEKDlg::OnClose()
 {
-	run(this, true);
+	run(this, TERM);
 	if (CanExit())
 		CDialogEx::OnClose();
 }
@@ -151,6 +180,7 @@ void CKODEKDlg::OnClose()
 
 void CKODEKDlg::OnCancel()
 {
+	run(this, TERM);
 	if (CanExit())
 		CDialogEx::OnCancel();
 }
@@ -169,35 +199,30 @@ BOOL CKODEKDlg::CanExit()
 	return TRUE;
 }
 
-extern CString FileOpen(bool load);
-extern wchar_t * fileDefault;
-
-static CString named;
+extern bool FileOpen(bool load);
+extern CString fileDefault;
 
 //The functions below should thread the while loop
 void CKODEKDlg::OnBnClickedDecompress()
 {
-	run(this, false);
-	fileDefault = _T("test.cpp");
-	if ((named = FileOpen(false)) == "") {
-		run(this, true);
+	if(run(this, START)) return;
+	fileDefault = _T("test.cpp");//TODO: where name inside, then after name decode process
+	if (FileOpen(false)) {
+		run(this, ACTION_DECOMPRESS);
 		return;
 	}
-	while (running);
-	run(this, true);
+	run(this, END);
 }
-
 
 void CKODEKDlg::OnBnClickedCompress()
 {
-	run(this, false);
-	fileDefault = NULL;
-	if ((named = FileOpen(true)) == "") {
-		run(this, true);
+	if(run(this, START)) return;
+	fileDefault = _T("");
+	if (FileOpen(true)) {
+		run(this, ACTION_COMPRESS);
 		return;
 	}
-	while (running);
-	run(this, true);
+	run(this, END);
 }
 
 void CKODEKDlg::OnBnClickedAbout()
@@ -205,6 +230,8 @@ void CKODEKDlg::OnBnClickedAbout()
 	About dlg;
 	dlg.DoModal();
 }
+
+//if(run(this, START)) return; is the lock, and ...
 
 bool CKODEKDlg::code(CHAR* file, LONG* val)
 {
@@ -223,7 +250,7 @@ bool CKODEKDlg::decode(CHAR* file, LONG* val)
 
 bool CKODEKDlg::close()
 {
-	// TODO: Add your dispatch handler code here
+	//if (run(this, TERM)) return;
 
 	return true;
 }
