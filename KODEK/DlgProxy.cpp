@@ -99,33 +99,33 @@ HRESULT flags(bool flag) {
 HRESULT CKODEKDlgAutoProxy::code(CHAR* file, LONG* val)
 {
 	AFX_MANAGE_STATE(AfxGetAppModuleState());
-	return flags(CKODEKDlg::code(file, val));
+	return flags(m_pDialog->code(file, val));
 }
 
 HRESULT CKODEKDlgAutoProxy::decode(CHAR* file, LONG* val)
 {
 	AFX_MANAGE_STATE(AfxGetAppModuleState());
 
-	return flags(CKODEKDlg::decode(file, val));
+	return flags(m_pDialog->decode(file, val));
 }
 
 HRESULT CKODEKDlgAutoProxy::close()
 {
 	AFX_MANAGE_STATE(AfxGetAppModuleState());
 
-	return flags(CKODEKDlg::close());
+	return flags(m_pDialog->close());
 }
 
 HRESULT CKODEKDlgAutoProxy::streamCode(CHAR* file, LONG* val)
 {
 	AFX_MANAGE_STATE(AfxGetAppModuleState());
 
-	return flags(CKODEKDlg::streamCode(file, val));
+	return flags(m_pDialog->streamCode(file, val));
 }
 
 HRESULT CKODEKDlgAutoProxy::stream(CHAR* buffer, LONG* len, LONG* val)
 {
 	AFX_MANAGE_STATE(AfxGetAppModuleState());
 
-	return flags(CKODEKDlg::stream(buffer, len, val));
+	return flags(m_pDialog->stream(buffer, len, val));
 }

@@ -9,6 +9,8 @@
 #include "afxdialogex.h"
 #include "About.h"
 #include "Error.h"
+#include "Enumerations.h"
+#include "thread.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -25,6 +27,7 @@ CKODEKDlg::CKODEKDlg(CWnd* pParent /*=NULL*/)
 {
 	m_hIcon = AfxGetApp()->LoadIcon(IDR_MAINFRAME);
 	m_pAutoProxy = NULL;
+	here = END;
 }
 
 CKODEKDlg::~CKODEKDlg()
@@ -36,12 +39,20 @@ CKODEKDlg::~CKODEKDlg()
 		m_pAutoProxy->m_pDialog = NULL;
 }
 
-static enum state { START, ACTION_COMPRESS, ACTION_DECOMPRESS, ACTION_COMPRESS_STREAM, ACTION_STREAM, END, TERM, ERRORBOX };
-static enum state here = END;
-
 extern void bgTask(CKODEKDlg *that);//can call error function
 
 static bool run(CKODEKDlg *that, enum state newHere);//forward
+
+static long * restore = NULL;
+static void xdo(long * val) {
+	restore = val;
+	*access = *val;
+}
+static void xundo() {
+	if (restore == NULL) return;//not in use
+	*restore = *access;
+	restore = NULL;
+}
 
 static UINT BackThread(LPVOID pParam) {
 	CKODEKDlg * gui = (CKODEKDlg *)pParam;
@@ -66,21 +77,22 @@ static bool run(CKODEKDlg *that, enum state newHere) {
 		Error dlg;
 		dlg.DoModal();
 	}
-	if (here != END && newHere == START) {
+	if (that->here != END && newHere == START) {
 		return true;//not allowed!!
 	}
-	if(here != TERM) here = newHere;
+	if(that->here != TERM) that->here = newHere;
 	if (that != NULL) {
-		if (here == END) {
+		if (that->here == END) {
+			xundo();
 			progress(&that->progressBar, 0);
 			that->GetSafeOwner()->SetWindowText(_T("KODEK"));
 		}
-		that->seedEntry.EnableWindow(here == END);
-		that->compressButton.EnableWindow(here == END);
-		that->decompressButton.EnableWindow(here == END);
+		that->seedEntry.EnableWindow(that->here == END);
+		that->compressButton.EnableWindow(that->here == END);
+		that->decompressButton.EnableWindow(that->here == END);
 	}
-	if (here == TERM) return true;//exit don't do anything
-	if (here != END && here != START) {
+	if (that->here == TERM) return true;//exit don't do anything
+	if (that->here != END && that->here != START) {
 		AfxBeginThread(BackThread, that);
 	}
 	return false;//OK
@@ -199,14 +211,14 @@ BOOL CKODEKDlg::CanExit()
 	return TRUE;
 }
 
-extern bool FileOpen(bool load);
-extern CString fileDefault;
+enum state CKODEKDlg::here;
 
 //The functions below should thread the while loop
 void CKODEKDlg::OnBnClickedDecompress()
 {
 	if(run(this, START)) return;
-	fileDefault = _T("test.cpp");//TODO: where name inside, then after name decode process
+	fileDefault = CString();//replacing is sync
+	run(this, DECOMPRESS_FILENAME);
 	if (FileOpen(false)) {
 		run(this, ACTION_DECOMPRESS);
 		return;
@@ -217,7 +229,6 @@ void CKODEKDlg::OnBnClickedDecompress()
 void CKODEKDlg::OnBnClickedCompress()
 {
 	if(run(this, START)) return;
-	fileDefault = _T("");
 	if (FileOpen(true)) {
 		run(this, ACTION_COMPRESS);
 		return;
@@ -235,38 +246,49 @@ void CKODEKDlg::OnBnClickedAbout()
 
 bool CKODEKDlg::code(CHAR* file, LONG* val)
 {
-	// TODO: Add your dispatch handler code here
-
+	if (run(this, START)) return false;
+	xdo(val);
+	fileDefault = CString(file);
+	run(this, ACTION_COMPRESS);
 	return true;
 }
 
 bool CKODEKDlg::decode(CHAR* file, LONG* val)
 {
-	// TODO: Add your dispatch handler code here
-
+	if (run(this, START)) return false;
+	xdo(val);
+	fileDefault = CString();
+	run(this, DECOMPRESS_FILENAME);
+	if (file != NULL) fileDefault = CString(file);
+	run(this, ACTION_DECOMPRESS);
 	return true;
 }
 
 
 bool CKODEKDlg::close()
 {
-	//if (run(this, TERM)) return;
-
+	OnCancel();
 	return true;
 }
 
 
 bool CKODEKDlg::streamCode(CHAR* file, LONG* val)
 {
-	// TODO: Add your dispatch handler code here
-
+	if (run(this, START)) return false;
+	xdo(val);
+	fileDefault = CString(file);
+	run(this, ACTION_COMPRESS_STREAM);
 	return true;
 }
 
 
 bool CKODEKDlg::stream(CHAR* buffer, LONG* len, LONG* val)
 {
-	// TODO: Add your dispatch handler code here
-
+	if (run(this, START)) return false;
+	buff = buffer;
+	lenref = len;
+	//no filename ...
+	xdo(val);
+	run(this, ACTION_STREAM);
 	return true;
 }

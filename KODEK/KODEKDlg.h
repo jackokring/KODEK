@@ -3,11 +3,12 @@
 //
 
 #pragma once
+#include "stdafx.h"
 #include "afxwin.h"
 #include "afxcmn.h"
+#include "resource.h"
 
 class CKODEKDlgAutoProxy;
-
 
 // CKODEKDlg dialog
 class CKODEKDlg : public CDialogEx
@@ -31,7 +32,6 @@ public:
 protected:
 	CKODEKDlgAutoProxy* m_pAutoProxy;
 	HICON m_hIcon;
-
 	BOOL CanExit();
 
 	// Generated message map functions
@@ -53,9 +53,11 @@ public:
 	CButton aboutButton;
 	afx_msg void OnBnClickedAbout();
 
-	static bool CKODEKDlg::code(CHAR* file, LONG* val);
-	static bool CKODEKDlg::decode(CHAR* file, LONG* val);
-	static bool CKODEKDlg::close();
-	static bool CKODEKDlg::streamCode(CHAR* file, LONG* val);
-	static bool CKODEKDlg::stream(CHAR* buffer, LONG* len, LONG* val);
+	static enum state here;
+
+	bool code(CHAR* file, LONG* val);
+	bool decode(CHAR* file, LONG* val);
+	bool close();
+	bool streamCode(CHAR* file, LONG* val);
+	bool stream(CHAR* buffer, LONG* len, LONG* val);
 };

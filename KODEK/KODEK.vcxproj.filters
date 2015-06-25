@@ -42,6 +42,12 @@
     <ClInclude Include="Error.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="thread.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Enumerations.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="KODEK.cpp">
@@ -91,7 +97,6 @@
     <None Include="res\kodek2.bin">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="HTML.htm" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="KODEK.rc">
@@ -100,15 +105,6 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="res\KODEK.ico">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="..\..\..\..\Icon_54.ico">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="..\..\..\..\Icon Resources\Icon_54.ico">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="res\icon1.ico">
       <Filter>Resource Files</Filter>
     </Image>
     <Image Include="res\foobar.ico">

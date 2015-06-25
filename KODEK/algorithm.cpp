@@ -70,7 +70,8 @@ static int inverse(int a, int m) {
 //sequence travel functions
 
 //the SEED contains the compressed information statistic
-long seed = 7;
+static long seed = 7;
+long *access = &seed;
 
 //these four are the sequencing control numbers, constants (sort of)
 static int b[] = { 411, 713 };
