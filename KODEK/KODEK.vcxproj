@@ -154,6 +154,7 @@
     <ClInclude Include="DlgProxy.h" />
     <ClInclude Include="Enumerations.h" />
     <ClInclude Include="Error.h" />
+    <ClInclude Include="fileIO.h" />
     <ClInclude Include="KODEK.h" />
     <ClInclude Include="KODEKDlg.h" />
     <ClInclude Include="Resource.h" />
@@ -167,6 +168,7 @@
     <ClCompile Include="DlgProxy.cpp" />
     <ClCompile Include="Error.cpp" />
     <ClCompile Include="filedialog.cpp" />
+    <ClCompile Include="fileIO.cpp" />
     <ClCompile Include="KODEK.cpp" />
     <ClCompile Include="KODEKDlg.cpp" />
     <ClCompile Include="stdafx.cpp">

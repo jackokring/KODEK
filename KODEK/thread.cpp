@@ -2,6 +2,7 @@
 #include "KODEKDlg.h"
 #include "thread.h"
 #include "Enumerations.h"
+#include "fileIO.h"
 
 char * buff;
 long * lenref;
