@@ -30,6 +30,12 @@ fileIO::fileIO(bool read, CString name)
 	}
 }
 
+long long fileIO::getPos() {
+	if (reading) return io.tellg();
+	if(io.tellp() >= size) return (long long)size - 1;
+	return io.tellp();
+}
+
 int fileIO::get() {
 	if (!reading) return 0;
 	io.seekg(-(long) sizeof(int), ios::beg);
