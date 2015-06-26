@@ -4,7 +4,7 @@
 
 
  /* File created by MIDL compiler version 8.00.0603 */
-/* at Thu Jun 25 16:18:36 2015
+/* at Fri Jun 26 16:44:47 2015
  */
 /* Compiler settings for KODEK.idl:
     Oicf, W1, Zp8, env=Win32 (32b run), target_arch=X86 8.00.0603 

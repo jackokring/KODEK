@@ -272,11 +272,13 @@ bool CKODEKDlg::close()
 }
 
 
-bool CKODEKDlg::streamCode(CHAR* file, LONG* val)
+bool CKODEKDlg::streamCode(CHAR* buffer, LONG* len, LONG* val)
 {
 	if (run(this, START)) return false;
+	buff = buffer;
+	lenref = len;
+	//no filename ...
 	xdo(val);
-	fileDefault = CString(file);
 	run(this, ACTION_COMPRESS_STREAM);
 	return true;
 }

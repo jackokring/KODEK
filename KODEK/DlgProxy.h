@@ -54,7 +54,7 @@ protected:
 	};
 	HRESULT decode(CHAR* file, LONG* val);
 	HRESULT close();
-	HRESULT streamCode(CHAR* file, LONG* val);
+	HRESULT streamCode(CHAR* buffer, LONG* len, LONG* val);
 	HRESULT stream(CHAR* buffer, LONG* len, LONG* val);
 };
 

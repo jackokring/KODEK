@@ -116,11 +116,11 @@ HRESULT CKODEKDlgAutoProxy::close()
 	return flags(m_pDialog->close());
 }
 
-HRESULT CKODEKDlgAutoProxy::streamCode(CHAR* file, LONG* val)
+HRESULT CKODEKDlgAutoProxy::streamCode(CHAR* buffer, LONG* len, LONG* val)
 {
 	AFX_MANAGE_STATE(AfxGetAppModuleState());
 
-	return flags(m_pDialog->streamCode(file, val));
+	return flags(m_pDialog->streamCode(buffer, len, val));
 }
 
 HRESULT CKODEKDlgAutoProxy::stream(CHAR* buffer, LONG* len, LONG* val)
