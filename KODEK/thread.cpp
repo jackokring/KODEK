@@ -5,10 +5,13 @@
 #include "fileIO.h"
 
 char * buff;
-long * lenref;
+long * lenref;//keep *lenref zero until done
 
 void bgTask(CKODEKDlg *that) {
-	if (that->here == DECOMPRESS_FILENAME) return;//prevent tri thread test
+	if (that->here == DECOMPRESS_FILENAME) {
+		*lenref = 1;//unlock
+		return;//prevent tri thread test
+	}
 	/* In reality ACTION_DECOMPRESS must wait for DECOMPRESS_FILENAME to finish */
 	error(that);
 }

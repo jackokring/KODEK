@@ -57,7 +57,7 @@ static void xundo() {
 static UINT BackThread(LPVOID pParam) {
 	CKODEKDlg * gui = (CKODEKDlg *)pParam;
 	bgTask(gui);
-	run(gui, END);//the thread has completed
+	if(gui->here != DECOMPRESS_FILENAME) run(gui, END);//the thread has completed
 	return 0;
 }
 
@@ -214,16 +214,25 @@ BOOL CKODEKDlg::CanExit()
 enum state CKODEKDlg::here;
 
 //The functions below should thread the while loop
+static UINT bg1(LPVOID that) {
+	while (*lenref == 0) SwitchToThread();//sync (by using another long * as a temp)
+	fileDefault = CString(buff);
+	if (FileOpen(false)) {
+		run((CKODEKDlg *)that, ACTION_DECOMPRESS);
+		return;
+	}
+	run((CKODEKDlg *)that, END);
+}
+
 void CKODEKDlg::OnBnClickedDecompress()
 {
 	if(run(this, START)) return;
-	fileDefault = CString();//replacing is sync
+	static char buffb[256];
+	buff = buffb;
+	long len = 0;
+	lenref = &len;
 	run(this, DECOMPRESS_FILENAME);
-	if (FileOpen(false)) {
-		run(this, ACTION_DECOMPRESS);
-		return;
-	}
-	run(this, END);
+	AfxBeginThread(bg1, this);
 }
 
 void CKODEKDlg::OnBnClickedCompress()
@@ -253,14 +262,24 @@ bool CKODEKDlg::code(CHAR* file, LONG* val)
 	return true;
 }
 
+static UINT bg2(LPVOID that) {
+	while (*lenref == 0) SwitchToThread();//sync (by using another long * as a temp)
+	fileDefault = (fileDefault != "") ? fileDefault : CString(buff);
+	run((CKODEKDlg *)that, ACTION_DECOMPRESS);
+}
+
+static char buffb[256];
+
 bool CKODEKDlg::decode(CHAR* file, LONG* val)
 {
 	if (run(this, START)) return false;
 	xdo(val);
-	fileDefault = CString();
+	buff = buffb;
+	static long len = 0;
+	lenref = &len;
+	fileDefault = CString(file);
 	run(this, DECOMPRESS_FILENAME);
-	if (file != NULL) fileDefault = CString(file);
-	run(this, ACTION_DECOMPRESS);
+	AfxBeginThread(bg2, this);
 	return true;
 }
 
@@ -272,14 +291,14 @@ bool CKODEKDlg::close()
 }
 
 
-bool CKODEKDlg::streamCode(CHAR* buffer, LONG* len, LONG* val)
+bool CKODEKDlg::name(CHAR* buffer, LONG* len, LONG* val)
 {
 	if (run(this, START)) return false;
-	buff = buffer;
+	buff = buffb;
+	*len = 0;
 	lenref = len;
-	//no filename ...
 	xdo(val);
-	run(this, ACTION_COMPRESS_STREAM);
+	run(this, DECOMPRESS_FILENAME);
 	return true;
 }
 

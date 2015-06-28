@@ -67,7 +67,7 @@ BEGIN_DISPATCH_MAP(CKODEKDlgAutoProxy, CCmdTarget)
 	DISP_FUNCTION_ID(CKODEKDlgAutoProxy, "code", dispidcode, code, VT_HRESULT, VTS_PI1 VTS_PI4)
 	DISP_FUNCTION_ID(CKODEKDlgAutoProxy, "decode", dispiddecode, decode, VT_HRESULT, VTS_PI1 VTS_PI4)
 	DISP_FUNCTION_ID(CKODEKDlgAutoProxy, "close", dispidclose, close, VT_HRESULT, VTS_NONE)
-	DISP_FUNCTION_ID(CKODEKDlgAutoProxy, "streamCode", dispidstreamCode, streamCode, VT_HRESULT, VTS_PI1 VTS_PI4)
+	DISP_FUNCTION_ID(CKODEKDlgAutoProxy, "name", dispidname, name, VT_HRESULT, VTS_PI1 VTS_PI4)
 	DISP_FUNCTION_ID(CKODEKDlgAutoProxy, "stream", dispidstream, stream, VT_HRESULT, VTS_PI1 VTS_PI4 VTS_PI4)
 END_DISPATCH_MAP()
 
@@ -116,11 +116,11 @@ HRESULT CKODEKDlgAutoProxy::close()
 	return flags(m_pDialog->close());
 }
 
-HRESULT CKODEKDlgAutoProxy::streamCode(CHAR* buffer, LONG* len, LONG* val)
+HRESULT CKODEKDlgAutoProxy::name(CHAR* buffer, LONG* len, LONG* val)
 {
 	AFX_MANAGE_STATE(AfxGetAppModuleState());
 
-	return flags(m_pDialog->streamCode(buffer, len, val));
+	return flags(m_pDialog->name(buffer, len, val));
 }
 
 HRESULT CKODEKDlgAutoProxy::stream(CHAR* buffer, LONG* len, LONG* val)

@@ -47,14 +47,14 @@ protected:
 	enum
 	{
 		dispidstream = 5L,
-		dispidstreamCode = 4L,
+		dispidname = 4L,
 		dispidclose = 3L,
 		dispiddecode = 2L,
 		dispidcode = 1L
 	};
 	HRESULT decode(CHAR* file, LONG* val);
 	HRESULT close();
-	HRESULT streamCode(CHAR* buffer, LONG* len, LONG* val);
+	HRESULT name(CHAR* buffer, LONG* len, LONG* val);
 	HRESULT stream(CHAR* buffer, LONG* len, LONG* val);
 };
 

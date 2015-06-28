@@ -10,4 +10,4 @@ extern int decompress();
 
 //buffers
 extern char * buff;
-extern long * lenref;
+extern long * lenref;//keep *lenref zero until done

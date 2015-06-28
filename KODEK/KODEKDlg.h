@@ -58,6 +58,6 @@ public:
 	bool code(CHAR* file, LONG* val);
 	bool decode(CHAR* file, LONG* val);
 	bool close();
-	bool streamCode(CHAR* buffer, LONG* len, LONG* val);
+	bool name(CHAR* buffer, LONG* len, LONG* val);
 	bool stream(CHAR* buffer, LONG* len, LONG* val);
 };
