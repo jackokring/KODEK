@@ -11,6 +11,7 @@
 #include "Error.h"
 #include "Enumerations.h"
 #include "thread.h"
+#include "Security.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -219,14 +220,24 @@ static UINT bg1(LPVOID that) {
 	fileDefault = CString(buff);
 	if (FileOpen(false)) {
 		run((CKODEKDlg *)that, ACTION_DECOMPRESS);
-		return;
+		return 0;
 	}
 	run((CKODEKDlg *)that, END);
+	return -1;
+}
+
+bool secWarn() {
+	Security dlg;
+	return dlg.DoModal() == IDOK;
 }
 
 void CKODEKDlg::OnBnClickedDecompress()
 {
 	if(run(this, START)) return;
+	if (!secWarn()) {
+		run(this, END);
+		return;
+	}
 	static char buffb[256];
 	buff = buffb;
 	long len = 0;
@@ -266,6 +277,7 @@ static UINT bg2(LPVOID that) {
 	while (*lenref == 0) SwitchToThread();//sync (by using another long * as a temp)
 	fileDefault = (fileDefault != "") ? fileDefault : CString(buff);
 	run((CKODEKDlg *)that, ACTION_DECOMPRESS);
+	return 0;
 }
 
 static char buffb[256];
@@ -273,6 +285,10 @@ static char buffb[256];
 bool CKODEKDlg::decode(CHAR* file, LONG* val)
 {
 	if (run(this, START)) return false;
+	if (!secWarn()) {
+		run(this, END);
+		return false;
+	}
 	xdo(val);
 	buff = buffb;
 	static long len = 0;
@@ -286,6 +302,7 @@ bool CKODEKDlg::decode(CHAR* file, LONG* val)
 
 bool CKODEKDlg::close()
 {
+	m_pAutoProxy = NULL;//kill proxy
 	OnCancel();
 	return true;
 }
