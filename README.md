@@ -1,11 +1,11 @@
-# KODEK
-MFC Visual Studio App
+# KODEK (C) 2015 K Ring Technologies, Simon P. Jackson, BEng.
+MFC Visual Studio App C++ Version
 
-This is the free non comercial use version. For commercial use contact jackokring@gmail.com with the
+This is the open source "free for non comercial use" version. For commercial use contact jackokring@gmail.com with the
 subject "KODEK COMMERCIAL", and I'll get back to any serious requests.
 
-## Road Map
+Please visit http://www.kring.co.uk and follow the DONATE HERE navigation for further information.
 
-1. Complete this version
-2. Make a DirectShow Filter wrapper DLL
-3. Add archival multi file features
+K Ring Technologies accepts no idiot liability out of use or incorrect use of this program.
+It is a tool for experimental use, and as such supplied as is. Do not download it if you don't know what your doing.
+Don't download it especially if you think you know what your doing. If you know what your doing OK.

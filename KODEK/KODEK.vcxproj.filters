@@ -110,6 +110,7 @@
       <Filter>Resource Files</Filter>
     </None>
     <None Include="Test EXE\KODEK.exe" />
+    <None Include="..\README.md" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="KODEK.rc">

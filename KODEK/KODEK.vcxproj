@@ -203,6 +203,7 @@
     </Midl>
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\README.md" />
     <None Include="KODEK.reg" />
     <None Include="KODEK.rgs" />
     <None Include="res\KODEK.rc2" />
