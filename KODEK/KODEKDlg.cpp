@@ -62,7 +62,7 @@ static UINT BackThread(LPVOID pParam) {
 	return 0;
 }
 
-static void progress(CProgressCtrl *myCtrl, int pos) {//MUST pass controls by reference
+void progress(CProgressCtrl *myCtrl, int pos) {//MUST pass controls by reference
 	int nLower, nUpper;
 	myCtrl->GetRange(nLower, nUpper);
 	myCtrl->SetPos((nUpper - nLower) * pos / 100);
@@ -234,10 +234,10 @@ bool secWarn() {
 void CKODEKDlg::OnBnClickedDecompress()
 {
 	if(run(this, START)) return;
-	if (!secWarn()) {
+	/* if (!secWarn()) {
 		run(this, END);
 		return;
-	}
+	} */ //does not need to be done here, as GUI presents file dialog cancel.
 	static char buffb[256];
 	buff = buffb;
 	long len = 0;

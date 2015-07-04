@@ -11,3 +11,4 @@ extern int decompress();
 //buffers
 extern char * buff;
 extern long * lenref;//keep *lenref zero until done
+extern void progress(CProgressCtrl *myCtrl, int pos);
